@@ -3,23 +3,23 @@
 #include <iostream>
 using namespace std;
 
-std::string read()
+string read()
 {
-	std::string in;
-	std::cout << "Enter a fractional decimal number:" << std::endl;;
-	std::cin >> in;
-	if ((std::cin.fail()) || ((in[0] != '-') && (in[0] != '+')))
+	string in;
+	cout << "Enter a fractional decimal number:" << endl;;
+	cin >> in;
+	if ((cin.fail()) || ((in[0] != '-') && (in[0] != '+')))
 	{
-		std::cout << "Error! Invalid input" << std::endl;
-		std::terminate();
+		cout << "Error! Invalid input" << endl;
+		terminate();
 	}
 	int err = 0;
 	for (int i = 1; i < in.length(); i++)
 	{
 		if (!isdigit(in[i]) && (in[i] != ',') && (in[i] != '.'))
 		{
-			std::cout << "Error! Invalid symbols" << std::endl;
-			std::terminate();
+			cout << "Error! Invalid symbols" << endl;
+			terminate();
 		}
 		if ((in[i] == ',') || (in[i] == '.'))
 		{
@@ -28,16 +28,16 @@ std::string read()
 	}
 	if (err > 1)
 	{
-		std::cout << "Error! More than one delimiters" << std::endl;
-		std::terminate();
+		cout << "Error! More than one delimiters" << endl;
+		terminate();
 	}
 	return in;
 }
 
-std::string Celaya(double H)
+string Celaya(double H)
 {
 	char symbol;
-	std::string leg;
+	string leg;
 	int intH = (int)H;
 	if (intH == 0)
 	{
@@ -64,9 +64,9 @@ std::string Celaya(double H)
 }
 
 
-std::string drobnaya(double J, int len)
+string drobnaya(double J, int len)
 {
-	std::string led;
+	string led;
 	int i = 0;
 	char symbol;
 	double gJ = J - (int)J;
@@ -95,8 +95,8 @@ std::string drobnaya(double J, int len)
 
 int main(void)
 {
-	std::string gH;
-	std::string input = read();
+	string gH;
+	string input = read();
 	int por = 0;
 	int zn = 0;
 	if (input[0] == '-')
@@ -111,9 +111,9 @@ int main(void)
 			input[i] = '.';
 		}
 	}
-	double a = std::stod(input.substr());
+	double a = stod(input.substr());
 	gH = Celaya(a) + drobnaya(a, 8);
-	a = std::stod(gH.substr());
+	a = stod(gH.substr());
 	while ((a < 1) || (a > 10))
 	{
 		if (a > 10)
@@ -127,8 +127,8 @@ int main(void)
 			a = a * 10;
 		}
 	}
-	std::cout << "Sign: " << zn << std::endl;
-	std::cout << "Exponent: " << por << std::endl;
-	std::cout << "Mantissa (normalized): ";
+	cout << "Sign: " << zn << endl;
+	cout << "Exponent: " << por << endl;
+	cout << "Mantissa (normalized): ";
 	printf("%.8f", a, "\n");
 }
